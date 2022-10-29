@@ -3,11 +3,12 @@
  */
 package com.book.manager.infrastructure.database.record
 
+import java.time.LocalDate
 import java.util.Date
 
 data class BookRecord(
     var id: Long? = null,
     var title: String? = null,
     var author: String? = null,
-    var releaseDate: Date? = null
+    var releaseDate: LocalDate? = null
 )
