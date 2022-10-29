@@ -9,5 +9,5 @@ data class RentalRecord(
     var bookId: Long? = null,
     var userId: Long? = null,
     var rentalDatetime: Date? = null,
-    var returnDatetime: Date? = null
+    var returnDeadline: Date? = null
 )

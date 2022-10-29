@@ -15,6 +15,6 @@ object RentalDynamicSqlSupport {
 
         val rentalDatetime = column<Date>("rental_datetime", JDBCType.TIMESTAMP)
 
-        val returnDatetime = column<Date>("return_datetime", JDBCType.TIMESTAMP)
+        val returnDeadline = column<Date>("return_deadline", JDBCType.TIMESTAMP)
     }
 }
