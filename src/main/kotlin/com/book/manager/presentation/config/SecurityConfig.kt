@@ -1,7 +1,13 @@
 package com.book.manager.presentation.config
 
+import com.book.manager.application.service.AuthenticationService
+import com.book.manager.application.service.security.BookManagerUserDetailsService
 import com.book.manager.bookmanager.BookManagerApplication
 import com.book.manager.domain.enum.RoleType
+import com.book.manager.presentation.handler.BookManagerAccessDeniedHandler
+import com.book.manager.presentation.handler.BookManagerAuthenticationEntryPoint
+import com.book.manager.presentation.handler.BookManagerAuthenticationFailureHandler
+import com.book.manager.presentation.handler.BookManagerAuthenticationSuccessHandler
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.builders.WebSecurity
@@ -25,11 +31,11 @@ class SecurityConfig(private val authenticationservice: AuthenticationService): 
       .loginProcessingUrl("/login")
       .usernameParameter("email")
       .passwordParameter("pass")
-      .successHandler(BookManagerApplicationSuccessHandler())
-      .failureHandler(BookManagerApplicationFailureHandler())
+      .successHandler(BookManagerAuthenticationSuccessHandler())
+      .failureHandler(BookManagerAuthenticationFailureHandler())
       .and()
       .exceptionHandling()
-      .authenticationEntryPoint(BookManagerApplicationEntryPoint())
+      .authenticationEntryPoint(BookManagerAuthenticationEntryPoint())
       .accessDeniedHandler(BookManagerAccessDeniedHandler())
       .and()
       .cors()
@@ -37,7 +43,7 @@ class SecurityConfig(private val authenticationservice: AuthenticationService): 
   }
 
   override fun configure(auth: AuthenticationManagerBuilder) {
-    auth.userDetailsService(BookManagerDetailsService(authenticationservice))
+    auth.userDetailsService(BookManagerUserDetailsService(authenticationservice))
       .passwordEncoder(BCryptPasswordEncoder())
   }
 
