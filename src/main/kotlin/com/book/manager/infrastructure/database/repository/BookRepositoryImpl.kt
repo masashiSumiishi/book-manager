@@ -8,6 +8,7 @@ import com.book.manager.infrastructure.database.mapper.BookMapper
 import com.book.manager.infrastructure.database.mapper.custom.BookWithRentalMapper
 import com.book.manager.infrastructure.database.mapper.custom.select
 import com.book.manager.infrastructure.database.mapper.custom.selectByPrimaryKey
+import com.book.manager.infrastructure.database.mapper.deleteByPrimaryKey
 import com.book.manager.infrastructure.database.record.custom.BookWithRentalRecord
 import org.springframework.stereotype.Repository
 import com.book.manager.infrastructure.database.mapper.insert
@@ -35,6 +36,10 @@ class BookRepositoryImpl(
 
   override fun update(id: Long, title: String?, author: String?, releaseDate: LocalDate?) {
     bookMapper.updateByPrimaryKeySelective(BookRecord(id, title, author, releaseDate))
+  }
+
+  override fun delete(id: Long) {
+    bookMapper.deleteByPrimaryKey(id)
   }
 
   private fun toModel(record: BookWithRentalRecord): BookWithRental {
