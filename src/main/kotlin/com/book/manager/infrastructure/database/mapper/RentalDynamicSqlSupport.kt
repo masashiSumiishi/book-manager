@@ -6,6 +6,7 @@ package com.book.manager.infrastructure.database.mapper
 import java.sql.JDBCType
 import java.util.Date
 import org.mybatis.dynamic.sql.SqlTable
+import java.time.LocalDateTime
 
 object RentalDynamicSqlSupport {
     object Rental : SqlTable("rental") {
@@ -13,8 +14,8 @@ object RentalDynamicSqlSupport {
 
         val userId = column<Long>("user_id", JDBCType.BIGINT)
 
-        val rentalDatetime = column<Date>("rental_datetime", JDBCType.TIMESTAMP)
+        val rentalDatetime = column<LocalDateTime>("rental_datetime", JDBCType.TIMESTAMP)
 
-        val returnDeadline = column<Date>("return_deadline", JDBCType.TIMESTAMP)
+        val returnDeadline = column<LocalDateTime>("return_deadline", JDBCType.TIMESTAMP)
     }
 }
